@@ -1,0 +1,62 @@
+﻿
+@model NumerosPrimos.Models.ListNumberPrime 
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+  
+<div class="container"> 
+    <div class="row">
+	    <div class="col-xs-12 col-sm-6 col-md-8 center"> 
+            @using (Html.BeginForm()) {
+                <div class="form-group">
+                    <label for="formGroupInputLarge1" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(p =>p.numberEntered, new { @class = "form-control", placeholder = "Ingresa número",type="number",@Value="1"})
+                        @Html.ValidationMessageFor(p=> p.numberEntered)
+                    </div>
+                </div><!--form-group-->
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type = "submit" value = "Comprobar" name = "command" class="btn btn-primary" /> 
+                    </div>
+                </div><!--form-group-->
+    
+            }<!--Html.BeginForm()-->
+          
+            
+                
+            @if(ViewBag.showList!=null){
+                <table class="table table-striped">
+                    <tr>
+                                <th>Número Ingresado</th>
+                                <th>Operador</th>
+                                <th>Número divisor</th>
+                                <th>=</th>
+                                <th>Residuo</th>
+                    </tr>
+                    @foreach (var p in this.Model.NumberPrimes){
+                            <tr>
+                                <td width="20%" >@p.numberEntered</td>
+                                <td width="20%" >%</td>
+                                <td width="20%" >@p.numberDivider</td>
+                                <td width="20%" >=</td>
+                                <td width="20%" >@p.result</td>
+                            </tr>
+                        }
+                    <tr>
+                        <td>
+                            @(ViewBag.isNumberPrime ?"El número ingresado es Primo por que es divisible  entre el mismo y el número 1.": "El número ingresado no es Primo por que es divisible entre números que no es el mismo") 
+                        </td>
+                    </tr>
+                </table>
+                } <!--End if-->
+                    
+           
+        </div><!--End col-xs-->
+	</div><!--End row-->
+</div><!--End containes-->
+
+
+
